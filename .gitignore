@@ -47,3 +47,4 @@ web/*:*@*:*
 # simpletest
 
 .idea
+.vscode
