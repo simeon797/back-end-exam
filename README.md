@@ -9,11 +9,11 @@ environment on Github Codespaces as well as locally.
 * Fork the repository in your personal GitHub account
 * Open the project in Codespaces
 * Open the terminal
-* Install composer dependencies `composer install`
-* Start the Drupal installation: `drush si` - specify **sqlite** as Database driver!
-* Optional: Change the admin password: `drush upwd admin <password>`
-* Open `web/sites/default/settings.php`
-* Update the value of the `$settings['config_sync_directory']` setting to `../config/default`, e.g.: `$settings['config_sync_directory'] = '../config/default';`
+* Set up the website by executing the followin script: `sh setup.sh`
+* Open the "ports" tab (right next to the terminal) and use the link under the "Local Address" to open your drupal instance
+* Admin credentials:
+  * username: admin
+  * password: 123
 * Export the initial configurations: `drush cex`
 * Commit & push the initial setup.
 * Run the development server: `drush serve`
