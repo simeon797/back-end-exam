@@ -1,0 +1,12 @@
+name: Students Example Module
+description: 'Students Drupal 8 Example Module.'
+type: module
+core_version_requirement: ^8 || ^9 || ^10
+package: Students
+dependencies:
+  - drupal:user
+
+# Information added by Drupal.org packaging script on 2022-09-03
+version: '2.0.3'
+project: 'students'
+datestamp: 1662192844

@@ -1,0 +1,7 @@
+custom_student.example:
+  path: '/custom-student/example'
+  defaults:
+    _title: 'Custom Student Management'
+    _controller: '\Drupal\custom_student\Controller\CustomStudentController::build'
+  requirements:
+    _permission: 'access content'

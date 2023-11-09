@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\students\students.install.
+ */
+
+/**
+ * Drupal Students module DB schema.
+ *
+ * @return array
+ *   Students DB schema.
+ */
+function students_schema() {
+  $schema['students'] = [
+    'description' => 'Stores example Students entries for demonstration purposes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => "Primary key: Student's unique ID",
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's {users}.uid",
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 150,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "Student's Name",
+      ],
+      'gender' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => "Student's Gender",
+      ],
+      'faculty_number' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => "Student's Faculty Number",
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'faculty_number' => [
+        'faculty_number',
+      ],
+    ],
+  ];
+
+  return $schema;
+}

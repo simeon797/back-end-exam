@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Students Drupal 8 Example Module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_menu().
+ */
+function students_array() {
+  return [
+    'admin/content/students' => [
+      'title' => 'Students list',
+      'route_name' => 'students_list',
+    ],
+    'admin/content/students/add' => [
+      'title' => 'Student Add',
+      'route_name' => 'students_add',
+    ],
+    'admin/content/students/delete/%' => [
+      'title' => 'Delete Student',
+      'route_name' => 'students_delete',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_help().
+ */
+function students_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name === 'help.page.students') {
+    $readme_file = file_exists(__DIR__ . '/README.md') ? __DIR__ . '/README.md' : __DIR__ . '/README.txt';
+    if (!file_exists($readme_file)) {
+      return NULL;
+    }
+    $text = file_get_contents($readme_file);
+    if ($text && !\Drupal::moduleHandler()->moduleExists('markdown')) {
+      return '<pre>' . $text . '</pre>';
+    }
+    else {
+      // Use the Markdown filter to render the README.
+      $filter_manager = \Drupal::service('plugin.manager.filter');
+      $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+      $config = ['settings' => $settings];
+      $filter = $filter_manager->createInstance('markdown', $config);
+      return $filter->process($text, 'en');
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function students_permission() {
+  return [
+    'manage students forms' => [
+      'title' => t('Manage students form submissions'),
+    ],
+    'use students form' => [
+      'title' => t('Use the students form'),
+    ],
+  ];
+}
