@@ -1,0 +1,6 @@
+students_list:
+  title: Students
+  description: Students Example Module
+  parent: system.admin_content
+  route_name: students_list
+  weight: 100

@@ -1,0 +1,5 @@
+name: Custom Student
+type: module
+description: Manages student enrollments and progress tracking
+package: Custom
+core_version_requirement: ^9 || ^10
