@@ -2,5 +2,5 @@ custom_student.add_article_content:
   route_name: node.add
   title: Add Article
   appears_on:
-    - system.admin_content
-  
+    view.course_view.page_1
+
