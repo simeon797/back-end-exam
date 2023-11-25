@@ -1,0 +1,53 @@
+uuid: 9a35b266-940c-43b2-99e1-e8c0a907e12f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs_demo
+    - field.storage.paragraph.field_text_demo
+    - search_api.server.paragraphs_demo_server
+  module:
+    - paragraphs
+    - search_api
+    - node
+_core:
+  default_config_hash: J9i1ApxG6J7lJzrNlAnZAe1tf9rmNfFPjBUpqIcoLPg
+id: paragraphs_demo_index
+name: 'Paragraphs demo index'
+description: null
+read_only: false
+field_settings:
+  field_text_demo:
+    label: 'Paragraphs » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs_demo:entity:field_text_demo'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs_demo
+        - field.storage.paragraph.field_text_demo
+      module:
+        - paragraphs
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: paragraphs_demo_server

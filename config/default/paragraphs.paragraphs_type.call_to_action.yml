@@ -1,0 +1,10 @@
+uuid: 988e1905-4242-4cac-a2ac-1cce226cce62
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_action
+label: 'Call to action'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

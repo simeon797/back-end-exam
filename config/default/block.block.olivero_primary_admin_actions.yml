@@ -2,13 +2,15 @@ uuid: 1c6b586b-6094-4414-8230-e0d53cdb5f8c
 langcode: en
 status: true
 dependencies:
+  module:
+    - language
   theme:
     - olivero
 _core:
   default_config_hash: Q9_2whdOj1YIomfvsIfopROW4FT_X5pY0DjdOiOaQ5U
 id: olivero_primary_admin_actions
 theme: olivero
-region: highlighted
+region: content_below
 weight: -5
 provider: null
 plugin: local_actions_block
@@ -17,4 +19,11 @@ settings:
   label: 'Primary admin actions'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

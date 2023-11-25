@@ -1,0 +1,30 @@
+uuid: 754783c5-975b-4ba6-ba8c-9975cb390cb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.instructor.field_bio
+    - field.field.node.instructor.field_email
+    - field.field.node.instructor.field_name
+    - field.field.node.instructor.field_phone
+    - node.type.instructor
+  module:
+    - user
+id: node.instructor.teaser
+targetEntityType: node
+bundle: instructor
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_bio: true
+  field_email: true
+  field_name: true
+  field_phone: true
+  langcode: true
+  search_api_excerpt: true

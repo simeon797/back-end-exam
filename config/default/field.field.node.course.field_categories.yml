@@ -1,0 +1,29 @@
+uuid: 7e851308-808c-4878-acfe-1ef7944c005a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_categories
+    - node.type.course
+    - taxonomy.vocabulary.course_categories
+id: node.course.field_categories
+field_name: field_categories
+entity_type: node
+bundle: course
+label: Categories
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      course_categories: course_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,22 @@
+uuid: 204dbd8a-5b98-4f00-b0ec-1231e52cdfe5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_phone
+    - node.type.instructor
+  module:
+    - text
+id: node.instructor.field_phone
+field_name: field_phone
+entity_type: node
+bundle: instructor
+label: Phone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text

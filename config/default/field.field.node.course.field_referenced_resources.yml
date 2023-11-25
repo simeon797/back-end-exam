@@ -1,0 +1,23 @@
+uuid: 86b1e3e2-f97c-49ef-b536-440641b81ff6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_referenced_resources
+    - node.type.course
+  module:
+    - entity_reference_revisions
+id: node.course.field_referenced_resources
+field_name: field_referenced_resources
+entity_type: node
+bundle: course
+label: 'Referenced Resources'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings: {  }
+field_type: entity_reference_revisions

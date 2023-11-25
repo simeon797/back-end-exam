@@ -1,0 +1,11 @@
+uuid: 5708c58a-0e2a-4c36-a34c-2bb925f7e9f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.instructor
+id: node.instructor
+target_entity_type_id: node
+target_bundle: instructor
+default_langcode: site_default
+language_alterable: false
