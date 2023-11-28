@@ -1,0 +1,47 @@
+uuid: 513cf29c-5c9d-4096-b986-de00347f9b18
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.my_courses
+  module:
+    - language
+    - system
+    - user
+    - views
+  theme:
+    - olivero
+id: olivero_views_block__my_courses_block_1
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: 'views_block:my_courses-block_1'
+settings:
+  id: 'views_block:my_courses-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/user/*'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator
+      student: student
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

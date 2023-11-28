@@ -1,0 +1,7 @@
+# mymodule.permissions.yml
+enroll_permission:
+  title: 'Enroll Permission'
+  description: 'Permission to enroll in courses.'
+withdraw_permission:
+  title: 'Withdraw Permission'
+  description: 'Permission to withdraw from courses.'

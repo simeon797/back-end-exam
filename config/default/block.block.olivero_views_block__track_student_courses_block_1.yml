@@ -1,0 +1,37 @@
+uuid: cb72c5a4-b147-42a6-a28e-758568b5909d
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.track_student_courses
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - olivero
+id: olivero_views_block__track_student_courses_block_1
+theme: olivero
+region: content_above
+weight: 0
+provider: null
+plugin: 'views_block:track_student_courses-block_1'
+settings:
+  id: 'views_block:track_student_courses-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /user/1
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

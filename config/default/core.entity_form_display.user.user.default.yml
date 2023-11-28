@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_enroll_courses
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
     - field.field.user.user.field_phone_number
@@ -68,4 +69,5 @@ content:
     third_party_settings: {  }
 hidden:
   contact: true
+  field_enroll_courses: true
   langcode: true

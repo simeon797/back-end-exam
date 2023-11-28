@@ -1,0 +1,21 @@
+add_course.enroll_course:
+  path: '/enroll/{node}'
+  defaults:
+    _controller: '\Drupal\add_course\Controller\CourseController::enroll'
+  requirements:
+    _access: 'TRUE'
+  options:
+    parameters:
+      node:
+        type: entity:node
+
+add_course.withdraw_course:
+  path: '/unenroll/{node}'
+  defaults:
+    _controller: '\Drupal\add_course\Controller\CourseController::dissroll'
+  requirements:
+    _access: 'TRUE'
+  options:
+    parameters:
+      node:
+        type: entity:node

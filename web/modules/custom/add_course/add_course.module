@@ -1,0 +1,221 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\node\Plugin\views\argument\Nid;
+use Drupal\user\Entity\User;
+use Drupal\views\Plugin\views\field\EntityField;
+use Drupal\views\ViewExecutable;
+use PhpParser\Node\Expr\Cast\Unset_;
+use Drupal\Core\Cache\Cache;
+
+
+
+function add_course_entity_operation(\Drupal\Core\Entity\EntityInterface $entity) {
+  $current_user = \Drupal::currentUser();
+
+  if ($current_user->hasPermission('enroll_permission') || $current_user->hasPermission('withdraw_permission')) {
+    if ($entity->getEntityTypeId() === 'node') {
+      /** @var NodeInterface $node */
+      $node = $entity;
+      if ($node->bundle() === 'course') {
+        $nid = $node->id();
+        $operation = 'enroll';
+        $current_user_id = $current_user->id();
+        $user_entity = User::load($current_user_id);
+        if ($user_entity->hasField('field_enroll_courses')) {
+          $field = $user_entity->get('field_enroll_courses');
+          foreach ($field as $delta => $item) {
+            $field_node = $item->entity;
+            if ($field_node->id() === $nid) {
+              $operation = 'withdraw';
+              break;
+            }
+          }
+          return _add_courses_entity_operation_build_operation($operation, $nid);
+        }
+      }
+    }
+  }
+}
+
+function _add_courses_entity_operation_build_operation(string $operation, int $node_id) {
+  $operations = [];
+  if ($operation === 'enroll') {
+    $operations['enroll'] = [
+      'title' => t('Enroll'),
+      'url' => \Drupal\Core\Url::fromRoute('add_course.enroll_course', ['node' => $node_id]),
+      'weight' => 50,
+    ];
+  }
+  if ($operation === 'withdraw') {
+    $operations['withdraw'] = [
+      'title' => t('Remove course'),
+      'url' => \Drupal\Core\Url::fromRoute('add_course.withdraw_course', ['node' => $node_id]),
+      'weight' => 50,
+    ];
+  }
+
+
+  return $operations;
+}
+
+
+// function add_course_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+// {
+//    //print_r(\Drupal::routeMatch()->getRouteName());exit;
+// }
+
+
+
+// function add_course_views_pre_render(ViewExecutable $view) {
+//   $result = $view->result;
+//     if($view->id() === 'course_view') {
+//       $current_user = \Drupal::currentUser();
+//       $entity_user = User::load($current_user->id());
+//       $field_course = $entity_user->get('field_enroll_courses');
+//       $user_course_node_ids = [];
+//       foreach ($field_course as $field) {
+//         $node_from_field = $field->entity;
+//         $user_course_node_ids[] = $node_from_field->id();
+//       }
+//   foreach ($result as $delta => $row) {
+//     /** @var NodeInterface $node */
+//     $node = $row->_entity;
+//     if(in_array($node->id(), $user_course_node_ids)) {
+//       $node->set('field_enroll',[]);
+//       }
+//       else{
+//         $node->set('field_remove_course',[]);
+//       }
+//       Cache::invalidateTags($node->getCacheTagsToInvalidate());
+
+//     }
+
+//   }
+// }
+
+
+// function add_course_preprocess_views_view_field(&$variables) {
+//   /** @var \Drupal\webprofiler\Views\TraceableViewExecutable $view */
+//   $view = $variables['view'];
+//   $view->
+
+
+
+
+//   if($view->id() === 'course_view') {
+//     $current_row_node_id = $variables['row']->nid;
+
+//     $courses_ids = [];
+//     foreach ($getCourses as $delta => $value) {
+//       $field_from_node = $value->entity;
+//       $courses_ids[] = $field_from_node->id();
+//     }
+//     foreach ($courses_ids as $id) {
+//       if($current_row_node_id == $id) {
+//         /** @var \Drupal\views\Plugin\views\field\EntityField $field*/
+//         dd($view['field']);
+//         // $field = $view->field['field_enroll'];
+
+//           // dd($view->field['field_enroll']);
+//         // unset($view->field['field_enroll']);
+//       }
+//       // if
+//       # code...
+//     }
+
+//     // dd($courses_id);
+
+//   }
+// }
+
+
+
+
+
+
+// function add_course_node_presave(NodeInterface $node) {
+//   if($node->bundle() === 'course') {
+//     $url_path = 'internal:/enroll/' . $node->id();
+
+//     if($node->hasField('field_enroll')) {
+//       $enroll_field = $node->get('field_enroll');
+//       $current_value = $enroll_field->getValue()[0];
+//       $current_value['title'] = 'Enroll';
+//       $current_value['uri'] = $url_path;
+//       $enroll_field->setValue($current_value);
+//     }
+
+//     $disroll_path = 'internal:/unenroll/' . $node->id();
+//     if($node->hasField('field_remove_course')) {
+//       $dissroll_field = $node->get('field_remove_course');
+//       $current_value = $dissroll_field->getValue()[0];
+//       $current_value['title'] = 'Remove Course';
+//       $current_value['uri'] = $disroll_path;
+//       $dissroll_field->setValue($current_value);
+//     }
+//   }
+// }
+// function add_course_node_insert(NodeInterface $node) {
+//   if($node->bundle() === 'course') {
+//     $url_path = 'internal:/enroll/' . $node->id();
+
+//     if($node->hasField('field_enroll')) {
+//       $enroll_field = $node->get('field_enroll');
+//       $current_value = $enroll_field->getValue()[0];
+//       $current_value['title'] = 'Enroll';
+//       $current_value['uri'] = $url_path;
+//       $enroll_field->setValue($current_value);
+//     }
+
+//     $disroll_path = 'internal:/unenroll/' . $node->id();
+
+//     if($node->hasField('field_remove_course')) {
+//       $dissroll_field = $node->get('field_remove_course');
+//       $current_value = $dissroll_field->getValue()[0];
+//       $current_value['title'] = 'Remove Course';
+//       $current_value['uri'] = $disroll_path;
+//       $dissroll_field->setValue($disroll_path);
+//     }
+//   }
+
+// }
+
+  // if($node->id() == 6 ) {
+
+    // $fields = $node->getFields();
+    // dd($fields);
+    // $node->set('title',' Marketing FundameDigitalntals  2661NEW');
+    // $node->save();
+
+  // }
+
+  // if ($entity->bundle() === 'course') {
+
+    // $nid = $node->id();
+    // $url_value = "/enroll/ . $nid";
+    // if check field exists
+    // $enroll_field =  $node->get('field_enroll');
+    // set new value of url
+    // $enroll_field->set();
+
+
+    // $disroll_field = $node->get('field_remove_course');
+    // set new dissroll value
+
+
+
+
+
+
+
+  // $nid = $node->id();
+  // $url_value = "/enroll/ . $nid";
+  // if check field exists
+  // $enroll_field =  $node->get('field_enroll');
+  // set new value of url
+  // $enroll_field->set();
+
+
+  // $disroll_field = $node->get('field_remove_course');
+  // set new dissroll value

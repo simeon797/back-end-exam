@@ -8,15 +8,14 @@ dependencies:
     - media.type.image
     - media.type.remote_video
     - media.type.video
-    - node.type.course
   module:
+    - add_course
     - admin_toolbar_search
     - block_content
     - comment
     - contact
     - file
     - media
-    - node
     - search
     - system
 id: student
@@ -35,47 +34,41 @@ permissions:
   - 'administer media'
   - 'administer media types'
   - 'create audio media'
-  - 'create course content'
   - 'create document media'
   - 'create image media'
   - 'create media'
   - 'create remote_video media'
   - 'create video media'
   - 'delete any audio media'
-  - 'delete any course content'
   - 'delete any document media'
   - 'delete any file'
   - 'delete any image media'
   - 'delete any media'
   - 'delete any remote_video media'
   - 'delete any video media'
-  - 'delete course revisions'
   - 'delete media'
   - 'delete own audio media'
-  - 'delete own course content'
   - 'delete own document media'
   - 'delete own files'
   - 'delete own image media'
   - 'delete own remote_video media'
   - 'delete own video media'
   - 'edit any audio media'
-  - 'edit any course content'
   - 'edit any document media'
   - 'edit any image media'
   - 'edit any remote_video media'
   - 'edit any video media'
   - 'edit own audio media'
   - 'edit own comments'
-  - 'edit own course content'
   - 'edit own document media'
   - 'edit own image media'
   - 'edit own remote_video media'
   - 'edit own video media'
-  - 'revert course revisions'
+  - enroll_permission
   - 'search content'
   - 'update any media'
   - 'update media'
   - 'use admin toolbar search'
   - 'view all media revisions'
-  - 'view course revisions'
   - 'view media'
+  - withdraw_permission

@@ -1,0 +1,20 @@
+uuid: 5cc33069-820c-4181-a2da-1dd534658254
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: user.field_enroll_courses
+field_name: field_enroll_courses
+entity_type: user
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
