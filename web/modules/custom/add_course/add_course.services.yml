@@ -1,0 +1,5 @@
+services:
+  add_course.event_subscriber:
+    class: '\Drupal\add_course\EventSubscriber\CustomEnrollmentSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

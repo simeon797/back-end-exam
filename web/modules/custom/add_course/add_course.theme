@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements theme_hook() for enrollment analytics.
+ */
+function theme_add_course($variables) {
+  $output = '';
+
+  // Render most recent courses.
+  $output .= '<h2>Most Recent Courses</h2>';
+  $output .= $variables['#renderer']->render($variables['#recent_courses']);
+
+  // Render most enrolled courses.
+  $output .= '<h2>Most Enrolled Courses</h2>';
+  $output .= $variables['#renderer']->render($variables['#most_enrolled_courses']);
+
+  // Render users by enrollment.
+  $output .= '<h2>Users by Enrollment</h2>';
+  $output .= $variables['#renderer']->render($variables['#users_by_enrollment']);
+
+  return $output;
+}
+

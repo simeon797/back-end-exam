@@ -23,6 +23,7 @@
         "drupal/devel_php": "^1.5",
         "drupal/entity_browser": "^2.9",
         "drupal/entity_usage": "^2.0@beta",
+        "drupal/maillog": "^1.1",
         "drupal/paragraphs": "^1.16",
         "drupal/profile": "^1.7",
         "drupal/search_api_db": "^1.30",

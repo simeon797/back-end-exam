@@ -19,3 +19,46 @@ add_course.withdraw_course:
     parameters:
       node:
         type: entity:node
+
+add_course.admin_emails:
+  path: '/admin/config/admin-emails'
+  defaults:
+    _form: '\Drupal\add_course\Form\CustomEmailsConfigForm'
+    _title: 'Admin Emails Configuration'
+  requirements:
+    _permission: 'access content'
+
+add_course.report:
+  path: /students-enrollment
+  defaults:
+    _controller: \Drupal\add_course\Controller\CourseController::report
+    _title: Students enrollment
+  requirements:
+    _permission: access content
+
+recent_courses.report:
+  path: /most-recent-courses
+  defaults:
+    _controller: \Drupal\add_course\Controller\CourseController::reportRecentCourses
+    _title: The most recent courses
+  requirements:
+    _permission: access content
+
+most_enrolled_courses.report:
+  path: /most-enrolled-courses
+  defaults:
+    _controller: \Drupal\add_course\Controller\CourseController::reportMostEnrolled
+    _title: The most enrolled courses
+  requirements:
+    _permission: access content
+
+most_enrolled_users.report:
+  path: /most-enrolled-users
+  defaults:
+    _controller: \Drupal\add_course\Controller\CourseController::reportUsersByEnrollment
+    _title: Students with most enrolled courses
+  requirements:
+    _permission: access content
+
+
+
