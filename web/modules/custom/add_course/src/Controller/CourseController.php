@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Drupal\add_course\Event\CustomEnrollmentEvent;
 
 class CourseController extends ControllerBase {
 
@@ -415,6 +416,10 @@ class CourseController extends ControllerBase {
       $user_entity->save();
       Cache::invalidateTags($node->getCacheTagsToInvalidate());
     }
+    $event = new CustomEnrollmentEvent($node);
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch($event, CustomEnrollmentEvent::UPDATE_NODE);
+
     return new RedirectResponse('/course-view');
   }
 
@@ -438,6 +443,10 @@ class CourseController extends ControllerBase {
         $user_entity->save();
         Cache::invalidateTags($node->getCacheTagsToInvalidate());
       }
+
+    $event = new CustomEnrollmentEvent($node);
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch($event, CustomEnrollmentEvent::REMOVE_COURSE);
     }
     return new RedirectResponse('/course-view');
   }

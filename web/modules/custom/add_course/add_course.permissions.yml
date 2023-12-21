@@ -5,3 +5,6 @@ enroll_permission:
 withdraw_permission:
   title: 'Withdraw Permission'
   description: 'Permission to withdraw from courses.'
+access the configuration form:
+  title: 'Access the configuration form'
+  description: 'View the configuration form'

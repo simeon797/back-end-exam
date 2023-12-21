@@ -25,12 +25,30 @@ class CustomEnrollmentSubscriber implements EventSubscriberInterface {
 
   public function onNodeRemove(CustomEnrollmentEvent $event) {
 
+    $node = $event->getNode();
+    $key = 'remove';
+    $config = \Drupal::config('custom_emails_config.settings');
+    $emails = array_merge([
+      \Drupal::currentUser()
+        ->getEmail(),
+    ], $config->get('admin_emails'));
+    foreach ($emails as $email) {
+      $mailManager = \Drupal::service('plugin.manager.mail');
+      $module = 'add_course';
+      $to = $email;
+      $params['message'] = 'data';
+      $params['node'] = $node;
+      $params['node_title'] = 'data';
+      $langcode = \Drupal::currentUser()->getPreferredLangcode();
+      $send = TRUE;
+      $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    }
 
   }
 
   public function onNodeUpdate(CustomEnrollmentEvent $event) {
     $node = $event->getNode();
-    $key = $event->getKey();
+    $key = 'update';
     $config = \Drupal::config('custom_emails_config.settings');
     $emails = array_merge([
       \Drupal::currentUser()
