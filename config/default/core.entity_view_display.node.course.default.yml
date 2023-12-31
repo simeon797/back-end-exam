@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.course.field_end_date
     - field.field.node.course.field_instructor
     - field.field.node.course.field_referenced_resources
+    - field.field.node.course.field_related_resources
     - field.field.node.course.field_start_date
     - node.type.course
   module:
@@ -59,7 +60,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 9
     region: content
   field_referenced_resources:
     type: entity_reference_revisions_entity_view
@@ -69,6 +70,14 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_related_resources:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_start_date:
     type: datetime_default

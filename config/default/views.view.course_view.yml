@@ -226,22 +226,19 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        field_course_name_value:
+          id: field_course_name_value
+          table: node__field_course_name
+          field: field_course_name_value
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
+          plugin_id: standard
+          order: ASC
           expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
+            label: 'Course Name'
+            field_identifier: field_course_name_value
+          exposed: true
       arguments: {  }
       filters:
         status:
@@ -357,7 +354,7 @@ display:
             group_items: {  }
           reduce_duplicates: false
           vid: course_categories
-          type: textfield
+          type: select
           hierarchy: false
           limit: true
           error_message: true
@@ -426,6 +423,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -446,6 +445,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions

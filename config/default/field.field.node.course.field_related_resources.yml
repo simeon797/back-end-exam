@@ -1,16 +1,16 @@
-uuid: 750c215b-4be6-49b1-8e9f-e4e8e7989e94
+uuid: 167bb16a-09bb-40aa-919a-304e9bfe9fc3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_instructor
+    - field.storage.node.field_related_resources
     - node.type.course
-    - node.type.instructor
-id: node.course.field_instructor
-field_name: field_instructor
+    - node.type.resource
+id: node.course.field_related_resources
+field_name: field_related_resources
 entity_type: node
 bundle: course
-label: Instructor
+label: 'Related Resources'
 description: ''
 required: false
 translatable: false
@@ -20,9 +20,9 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      instructor: instructor
+      resource: resource
     sort:
-      field: field_name
+      field: _none
       direction: ASC
     auto_create: false
     auto_create_bundle: ''

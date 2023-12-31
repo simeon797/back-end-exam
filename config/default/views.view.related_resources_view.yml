@@ -1,22 +1,24 @@
-uuid: 2c1d5a01-b6a5-4cfd-a8a5-65d23f3e6747
+uuid: e52a8521-49b7-4db1-98da-34d166226149
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_description
-    - system.menu.main
-    - user.role.administrator
+    - core.entity_view_mode.node.teaser
+    - field.storage.node.field_description1
+    - field.storage.node.field_file_upload
+    - node.type.resource
   module:
+    - file
     - node
     - text
     - user
-id: track_student_courses
-label: 'Track Student Courses'
+id: related_resources_view
+label: 'Related Resources View'
 module: views
 description: ''
 tag: ''
-base_table: users_field_data
-base_field: uid
+base_table: node_field_data
+base_field: nid
 display:
   default:
     id: default
@@ -24,19 +26,64 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'My Courses'
+      title: 'Related Resources View'
       fields:
         title:
           id: title
           table: node_field_data
           field: title
-          relationship: field_enroll_courses
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: Title
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            make_link: false
+            absolute: false
+            word_boundary: false
+            ellipsis: false
+            strip_tags: false
+            trim: false
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_description1:
+          id: field_description1
+          table: node__field_description1
+          field: field_description1
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Description
           exclude: false
           alter:
             alter_text: false
@@ -78,9 +125,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
+          type: text_default
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -91,15 +137,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_description:
-          id: field_description
-          table: node__field_description
-          field: field_description
-          relationship: field_enroll_courses
+        field_file_upload:
+          id: field_file_upload
+          table: node__field_file_upload
+          field: field_file_upload
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Description
+          label: 'File Upload'
           exclude: false
           alter:
             alter_text: false
@@ -110,22 +156,22 @@ display:
             external: false
             replace_spaces: false
             path_case: none
-            trim_whitespace: true
+            trim_whitespace: false
             alt: ''
             rel: ''
             link_class: ''
             prefix: ''
             suffix: ''
             target: ''
-            nl2br: true
-            max_length: 50
+            nl2br: false
+            max_length: 0
             word_boundary: true
             ellipsis: true
-            more_link: true
-            more_link_text: 'click read more'
+            more_link: false
+            more_link_text: ''
             more_link_path: ''
-            strip_tags: true
-            trim: true
+            strip_tags: false
+            trim: false
             preserve_tags: ''
             html: false
           element_type: ''
@@ -140,10 +186,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
+          click_sort_column: target_id
+          type: file_default
+          settings:
+            use_description_as_link_text: true
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -154,10 +201,23 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: some
+        type: mini
         options:
           offset: 0
-          items_per_page: 5
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       exposed_form:
         type: basic
         options:
@@ -169,62 +229,52 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: role
+        type: perm
         options:
-          role:
-            administrator: administrator
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
-      arguments: {  }
-      filters:
-        name:
-          id: name
-          table: users_field_data
-          field: name
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
-          plugin_id: string
-          operator: starts
-          value: ' '
-          group: 1
-          exposed: true
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
-            operator_id: name_op
-            label: 'Search by username : '
-            description: ''
-            use_operator: false
-            operator: name_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: name
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              student: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
             label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            field_identifier: ''
+          exposed: false
+          granularity: second
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            resource: resource
       style:
         type: table
         options:
@@ -233,24 +283,12 @@ display:
           default_row_class: true
           columns:
             title: title
-            field_description: field_description
-            field_instructor: field_instructor
           default: '-1'
           info:
             title:
               sortable: false
               default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_description:
-              align: views-align-center
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_instructor:
-              align: views-align-right
+              align: ''
               separator: ''
               empty_column: false
               responsive: ''
@@ -261,7 +299,9 @@ display:
           caption: ''
           description: ''
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -270,16 +310,7 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships:
-        field_enroll_courses:
-          id: field_enroll_courses
-          table: user__field_enroll_courses
-          field: field_enroll_courses
-          relationship: none
-          group_type: group
-          admin_label: 'field_enroll_courses: Content'
-          plugin_id: standard
-          required: true
+      relationships: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -288,49 +319,28 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
-        - user.roles
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.node.field_description'
-  block_1:
-    id: block_1
-    display_title: Block
-    display_plugin: block
-    position: 1
-    display_options:
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - user.roles
-      tags:
-        - 'config:field.storage.node.field_description'
+        - 'config:field.storage.node.field_description1'
+        - 'config:field.storage.node.field_file_upload'
   page_1:
     id: page_1
     display_title: Page
     display_plugin: page
-    position: 2
+    position: 1
     display_options:
       display_extenders: {  }
-      path: admin/track-progress-courses
-      menu:
-        type: normal
-        title: 'Check Student Progress'
-        description: ''
-        weight: 0
-        expanded: false
-        menu_name: main
-        parent: ''
-        context: '0'
+      path: related-resources-view
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
-        - user.roles
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.node.field_description'
+        - 'config:field.storage.node.field_description1'
+        - 'config:field.storage.node.field_file_upload'

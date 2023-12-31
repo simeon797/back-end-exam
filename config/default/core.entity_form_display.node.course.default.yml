@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.course.field_end_date
     - field.field.node.course.field_instructor
     - field.field.node.course.field_referenced_resources
+    - field.field.node.course.field_related_resources
     - field.field.node.course.field_start_date
     - node.type.course
   module:
@@ -58,7 +59,7 @@ content:
     third_party_settings: {  }
   field_instructor:
     type: options_select
-    weight: 15
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -79,6 +80,16 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_related_resources:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_start_date:
     type: datetime_default

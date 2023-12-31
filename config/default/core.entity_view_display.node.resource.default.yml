@@ -1,0 +1,40 @@
+uuid: 8844c6d9-f03e-4ca2-ba53-763cb738aefd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.resource.field_description1
+    - field.field.node.resource.field_file_upload
+    - node.type.resource
+  module:
+    - file
+    - text
+    - user
+id: node.resource.default
+targetEntityType: node
+bundle: resource
+mode: default
+content:
+  field_description1:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_file_upload:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

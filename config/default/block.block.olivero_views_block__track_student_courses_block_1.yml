@@ -1,6 +1,6 @@
 uuid: cb72c5a4-b147-42a6-a28e-758568b5909d
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - views.view.track_student_courses
