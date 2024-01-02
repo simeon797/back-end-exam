@@ -3,6 +3,7 @@
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 
+
 function add_course_entity_operation(\Drupal\Core\Entity\EntityInterface $entity) {
   $current_user = \Drupal::currentUser();
 
@@ -34,7 +35,6 @@ function add_course_entity_operation(\Drupal\Core\Entity\EntityInterface $entity
 function _add_courses_entity_operation_build_operation(string $operation, int $node_id) {
   $operations = [];
   if ($operation === 'enroll') {
-
     $operations['enroll'] = [
       'title' => t('Enroll'),
       'url' => \Drupal\Core\Url::fromRoute('add_course.enroll_course', ['node' => $node_id]),
@@ -48,8 +48,7 @@ function _add_courses_entity_operation_build_operation(string $operation, int $n
       'weight' => 50,
     ];
   }
-
-
+  
   return $operations;
 }
 

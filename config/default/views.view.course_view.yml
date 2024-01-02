@@ -147,7 +147,7 @@ display:
           admin_label: ''
           entity_type: node
           plugin_id: entity_operations
-          label: 'Operations links'
+          label: ''
           exclude: false
           alter:
             alter_text: false

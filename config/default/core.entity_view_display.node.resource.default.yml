@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.resource.field_description1
     - field.field.node.resource.field_file_upload
+    - field.field.node.resource.field_resource_title
     - node.type.resource
   module:
     - file
@@ -20,7 +21,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 2
     region: content
   field_file_upload:
     type: file_default
@@ -28,12 +29,20 @@ content:
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 102
+    weight: 3
+    region: content
+  field_resource_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   langcode: true

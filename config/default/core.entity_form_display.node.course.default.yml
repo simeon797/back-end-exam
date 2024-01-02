@@ -82,14 +82,10 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_related_resources:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 26
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_start_date:
     type: datetime_default

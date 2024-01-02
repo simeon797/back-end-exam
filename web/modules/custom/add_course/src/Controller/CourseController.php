@@ -13,8 +13,54 @@ use Drupal\Core\Datetime\DateFormatterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Drupal\add_course\Event\CustomEnrollmentEvent;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CourseController extends ControllerBase {
+
+ /**
+   * Returns nodes of the "course" content type in JSON format.
+   */
+
+   public function coursesApi() {
+
+    $query = \Drupal::entityQuery('node')
+    ->condition('type', 'course')
+    ->accessCheck(TRUE);
+    $nids = $query->execute();
+
+  $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+
+  $data = [];
+  foreach ($nodes as $node) {
+    $instructor_reference = $node->get('field_instructor')->entity;
+    $taxonomy_reference = $node->get('field_categories')->entity;
+    $resources_reference = $node->get('field_related_resources')->entity;
+
+    $data[] = [
+      'courseName' => $node->getTitle(),
+      'description' => $node->get('field_description')->value,
+      'startDate' => strtotime($node->get('field_start_date')->value),
+      'endDate' => strtotime($node->get('field_end_date')->value),
+      'instructor' => [
+        'name' => $instructor_reference ? $instructor_reference->get('field_name')->value : '',
+        'bio' => $instructor_reference ? $instructor_reference->get('field_bio')->value : '',
+        'email' => $instructor_reference ? $instructor_reference->get('field_email')->value : '',
+        'phone' => $instructor_reference ? $instructor_reference->get('field_phone')->value : '',
+        ],
+        'Categories' => $taxonomy_reference ? $taxonomy_reference->label() : '',
+        'title' => $resources_reference ? $resources_reference->get('field_resource_title')->value : '',
+        //'description' => $resources_reference ? $resources_reference->get('field_description1')->value : '',
+    ];
+  }
+
+  $response = new JsonResponse();
+  $response->setData($data);
+  $response->setEncodingOptions(JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+  return $response;
+}
+
+ 
 
   /**
    * The database connection service.

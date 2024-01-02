@@ -1,0 +1,19 @@
+uuid: 6584b73b-c36a-4997-bd31-eecaf917254c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_title
+    - node.type.resource
+id: node.resource.field_resource_title
+field_name: field_resource_title
+entity_type: node
+bundle: resource
+label: 'Resource Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

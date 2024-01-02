@@ -60,5 +60,14 @@ most_enrolled_users.report:
   requirements:
     _permission: access content
 
+json.api:
+  path: '/api'
+  defaults:
+    _title: 'JSON API'
+    _controller: '\Drupal\add_course\Controller\CourseController::coursesApi'
+  requirements:
+   _permission: 'access content'
+
+
 
 
